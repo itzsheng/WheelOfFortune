@@ -17,24 +17,80 @@ public class WheelOfFortune {
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    
-      Scanner user = new Scanner(System.in);
+      String letter;
+      String puzzle = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
+      Scanner userGuess = new Scanner(System.in);
+      
+      //Instructions for the user
       System.out.println(
       "                 ======================\n    " +
-      "                 =  Wheel Of Fortune  = \n   " +
-      "                 ======================\n    " +
-      "         1. Spin the wheel\n" +
+      "             =  Wheel Of Fortune  = \n   " +
+      "              ======================\n    " +
+      "     1. Spin the wheel\n" +
       "         2. Buy a vowel\n" +
       "         3. Solve the puzzle\n" + 
       "         4. Quit\n" + 
-      "         5.\n" + 
-      "         6.\n" + 
-      "         7.\n" +
+      "         5. N/A\n" + 
+      "         6. N/A\n" + 
+      "         7. N/A\n" +
       "         8. Toggle Puzzle\n" + 
       "         9. Test letter input\n\n" +
       "         Please select a number :    ");
+      
+      boolean quit = false;
+      while (!quit) {
+      String userInput = userGuess.nextLine();
+      int choice = Integer.parseInt(userInput);
+      
+      switch (choice) {
+          case 1:
+              System.out.println("You chose to spin the wheel");
+              spinWheel();
+              randomPuzzle();
+              
+              System.out.println("Please enter a letter : ");
+
+              break;
+          case 2:
+              System.out.println("You choose to buy a vowel");
+              break;
+          case 3:
+              System.out.println("You have chose to solve the puzzle");
+              break;
+          case 4:
+              System.exit(0);
+              break;
+          case 5:
+              System.out.println("N/A");
+              break;
+          case 6:
+              System.out.println("N/A");
+              break;
+          case 7:
+              System.out.println("N/A");
+              break;
+          case 8:
+              System.out.println(puzzle);
+              int number;
+             Scanner scan = new Scanner(System.in);
+              System.out.println("Press 8 again to untoggle the puzzle");
+            number = scan.nextInt();
+ 
+              break;
+          case 9:
+              System.out.println("Test letter input : ");
+              String test = userGuess.next();
+              System.out.println("You selected  : " + test);
+              break;
+          default:
+              break;
+      }
+      }
+      
+      
+      
   }
-	
+//Creating a method for the user to spin the wheel with the 24 different wedge values
       public static void spinWheel(){
           String [] wedgeValues = {"$300","$300","$300","$300","$300","$350",
               "$400", "$400", "$450",
@@ -45,59 +101,46 @@ public class WheelOfFortune {
               "$900", "$900",
               "$5000",
               "LOSE A TURN", "BANKRUPT"};
+          //Import java random to select a random value from the list
           Random value = new Random();
           int index = value.nextInt(wedgeValues.length);
+          //Then output what value was selected to the user
           System.out.println("You landed on : " + wedgeValues[index]);
       }
       
+      //Method for creating a puzzle, I figured eventually I'll make it into an array list like the spin wheel
+      //method for the future. For example adding different puzzles and it'll pick a random one.
+      public static void randomPuzzle(){
+          String puzzle = "THE QUICK BROWN DDOG JUMPS OVER THE LAZY DOG";
+          String input = " ";
+          Scanner userGuess = new Scanner(System.in);
+          boolean puzzleNotSolved = true;
+          
+          //Replaces the letters with blanks to hide the puzzle
+          while (puzzleNotSolved){
+              puzzleNotSolved = false;
+              for (char unvieldLetter: puzzle.toCharArray()){
+                  if (input.indexOf(unvieldLetter) == -1){
+                      System.out.print("_ ");
+                      puzzleNotSolved = true;
+                      
+                  }
+                  else {
+                      System.out.print(unvieldLetter);
+                  }
+              }
+           if (! puzzleNotSolved ){
+               break;
+           }
+           System.out.println("\nPlease enter a letter : ");
+           String letter = userGuess.next();
+           input += letter;
+           
+          }
+          
+      }
       
-//		String input = user.nextLine();
-//		int choice = Integer.parseInt(input);
-//		
-//		switch (choice) {
-//		case 1:
-//			System.out.println("You chose to spin the wheel!");
-//			break;
-//		case 2:
-//			System.out.println("You chose to buy a vowel!");
-//			break;
-//		case 3:
-//			System.out.println("You chose to solve the puzzle!");
-//			break;
-//		case 4:
-//			//As a QA tester, I want a "test" choice beneath the current user choices on the main menu,
-//			//so I can test additional functionality
-//			System.out.println("You chose testing\n" + 
-//								"Please enter a letter!");
-//			char letter;
-//			letter = user.next().charAt(0);
-//			
-//			if (Character.toString(letter).matches("^[a-zA-Z]+")){
-//				System.out.println("You have selected : " + letter);
-//			}
-//			else {
-//				System.out.println("You have entered more than one letter or a number!");
-//			}
-//			break;
-//		case 5:
-//			System.exit(0);
-//			break;
-//		default:
-//			System.out.println("You didnt chose any of the menu selection!");			
-//		}
-                
-//		As a user, I want to be able to guess a letter, so I can discover the puzzle.	
-		
-//		char letter;		
-//		System.out.print("Please enter a letter!\n");
-//		letter = user.next().charAt(0);
-//		
-//		if (Character.toString(letter).matches("^[a-zA-Z]+")){
-//			System.out.println("You have selected : " + letter);
-//		}
-//		else {
-//			System.out.println("You have entered more than one letter or a number!");
-//		}
+
   }
   
 
